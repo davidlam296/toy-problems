@@ -16,3 +16,15 @@ const detectCapitalUse = (word) => {
     ? true
     : false;
 };
+
+const detectCapitalUse = (word) => {
+  const numCapitals = word
+    .split('')
+    .reduce((total, char) => (total += char === char.toUpperCase() ? 1 : 0), 0);
+
+  return numCapitals === word.length ||
+    numCapitals === 0 ||
+    (word.charCodeAt(0) - 'A'.charCodeAt(0) < 26 && numCapitals === 1)
+    ? true
+    : false;
+};
