@@ -14,3 +14,9 @@ const sortArrayByParity = (A) => {
 
   return A;
 };
+
+const sortArrayByParity = (A) => {
+  A.sort((a, b) => (a % 2) - (b % 2));
+
+  return A;
+};
