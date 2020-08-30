@@ -1,7 +1,6 @@
 const largestMultipleOfThree = (digits) => {
-  if (digits.length === 1) {
+  if (digits.length === 1)
     return Number(digits[0] % 3 === 0) ? '' + digits[0] : '';
-  }
 
   digits.sort((a, b) => b - a);
 
@@ -13,39 +12,30 @@ const largestMultipleOfThree = (digits) => {
   const removeTwo = new Set([2, 5, 8]);
   let removeSet = null;
 
-  if (remainder === 1) {
-    removeSet = removeOne;
-  }
-
-  if (remainder === 2) {
-    removeSet = removeTwo;
-  }
+  if (remainder === 0) return digits.join('');
+  if (remainder === 1) removeSet = removeOne;
+  if (remainder === 2) removeSet = removeTwo;
 
   const originalLength = digits.length;
 
-  if (remainder !== 0) {
+  for (let i = digits.length - 1; i >= 0; i--) {
+    if (removeSet.has(digits[i])) {
+      digits.splice(i, 1);
+      break;
+    }
+  }
+
+  if (digits.length === originalLength) {
+    if (removeSet === removeOne) removeSet = removeTwo;
+    else removeSet = removeOne;
+
+    let removed = 0;
+
     for (let i = digits.length - 1; i >= 0; i--) {
+      if (removed === 2) break;
       if (removeSet.has(digits[i])) {
         digits.splice(i, 1);
-        break;
-      }
-    }
-
-    if (digits.length === originalLength) {
-      if (removeSet === removeOne) {
-        removeSet = removeTwo;
-      } else {
-        removeSet = removeOne;
-      }
-
-      let removed = 0;
-
-      for (let i = digits.length - 1; i >= 0; i--) {
-        if (removed === 2) break;
-        if (removeSet.has(digits[i])) {
-          digits.splice(i, 1);
-          removed++;
-        }
+        removed++;
       }
     }
   }
