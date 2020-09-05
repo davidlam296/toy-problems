@@ -27,6 +27,7 @@ const partitionLabels = (S) => {
       if (validPartition) {
         result.push(i - startOfPartition + 1);
         startOfPartition = i + 1;
+        charsInPartition = new Set();
       }
     }
   }
