@@ -3007,12 +3007,11 @@ const passwords = [
   'dndfcnhd',
 ];
 
-
 const findValidPasswords = (numCounts, reqChars, passwords) => {
   let result = 0;
 
   for (let i = 0; i < numCounts.length; i++) {
-    const [min, max] = numCounts[i].split('-').map(num => Number(num));
+    const [min, max] = numCounts[i].split('-').map((num) => Number(num));
     const require = reqChars[i];
     let count = 0;
 
@@ -3024,6 +3023,6 @@ const findValidPasswords = (numCounts, reqChars, passwords) => {
   }
 
   return result;
-}
+};
 
-console.log(findValidPasswords(numRange, charKeys, passwords));
+console.log(findValidPasswords(numRange, charKeys, passwords)); // 640
