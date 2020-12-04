@@ -28,6 +28,8 @@ rawData.forEach((row) => {
 
 passports.push(currPassport);
 
+// Passport Processing
+
 // byr (Birth Year)
 // iyr (Issue Year)
 // eyr (Expiration Year)
