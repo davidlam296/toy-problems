@@ -3014,11 +3014,11 @@ const part1 = (counts, reqs, passwords) => {
 
   for (let i = 0; i < counts.length; i++) {
     const [min, max] = counts[i].split('-').map((num) => Number(num));
-    const require = reqs[i];
+    const required = reqs[i];
     let count = 0;
 
     for (const char of passwords[i]) {
-      if (char === require) count++;
+      if (char === required) count++;
     }
 
     if (count >= min && count <= max) result++;
@@ -3032,11 +3032,11 @@ const part2 = (counts, reqs, passwords) => {
 
   for (let i = 0; i < counts.length; i++) {
     const [idx1, idx2] = counts[i].split('-').map((num) => Number(num));
-    const require = reqs[i];
+    const required = reqs[i];
     let count = 0;
 
-    if (passwords[i][idx1 - 1] === require) count++;
-    if (passwords[i][idx2 - 1] === require) count++;
+    if (passwords[i][idx1 - 1] === required) count++;
+    if (passwords[i][idx2 - 1] === required) count++;
 
     if (count === 1) result++;
   }
