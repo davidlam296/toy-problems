@@ -2,18 +2,19 @@ const generateMatrix = (n) => {
   const END = n * n;
   const matrix = new Array(n).fill(null).map((row) => new Array(n).fill(0));
 
-  let rowStart = 0;
-  let rowEnd = n - 1;
-  let colStart = 0;
-  let colEnd = n - 1;
-
-  let currNum = 1;
-  let currRow = 0;
-  let currCol = 0;
-  let currDirection = 'right';
+  let [
+    rowStart,
+    rowEnd,
+    colStart,
+    colEnd,
+    currNum,
+    currRow,
+    currCol,
+    currDirection,
+  ] = [0, n - 1, 0, n - 1, 1, 0, 0, 'right'];
 
   while (currNum <= END) {
-    matrix[currRow][currCol] = currNum;
+    matrix[currRow][currCol] = currNum++;
 
     if (currDirection === 'right') {
       if (currCol + 1 > colEnd) {
@@ -48,9 +49,9 @@ const generateMatrix = (n) => {
         currRow--;
       }
     }
-
-    currNum++;
   }
 
   return matrix;
 };
+
+console.log(generateMatrix(3));
