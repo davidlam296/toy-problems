@@ -28,25 +28,49 @@ const part1 = (instructions) => {
     index += indexChange;
   }
 
-  return [index, acc];
+  return [index, acc, visited];
 };
 
-const part2 = (instructions) =>
-  instructions.reduce((res, [action, qty], i) => {
+const part2 = (instructions) => {
+  const visited = part1(instructions)[2];
+  let res = -1;
+
+  visited.forEach((idx) => {
     if (res < 0) {
+      const [action, qty] = instructions[idx];
+
       if (action === 'jmp') {
         const [index, acc] = part1([
-          ...instructions.slice(0, i),
+          ...instructions.slice(0, idx),
           ['nop', qty],
-          ...instructions.slice(i + 1),
+          ...instructions.slice(idx + 1),
         ]);
 
-        if (index === instructions.length) return acc;
+        if (index === instructions.length) res = acc;
       }
+    }
+  });
 
-      return -1;
-    } else return res;
-  }, -1);
+  return res;
+};
 
-console.log(part1(instructions)); // Answer: 1941
+// const part2 = (instructions) =>
+//   instructions.reduce((res, [action, qty], i) => {
+//     if (res < 0) {
+//       if (action === 'jmp') {
+//         const [index, acc] = part1([
+//           ...instructions.slice(0, i),
+//           ['nop', qty],
+//           ...instructions.slice(i + 1),
+//         ]);
+
+//         if (index === instructions.length) console.log(i);
+//         if (index === instructions.length) return acc;
+//       }
+
+//       return -1;
+//     } else return res;
+//   }, -1);
+
+console.log(part1(instructions)[1]); // Answer: 1941
 console.log(part2(instructions)); // Answer: 2096
