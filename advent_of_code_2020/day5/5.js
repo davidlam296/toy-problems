@@ -2,6 +2,8 @@ const fs = require('fs');
 
 const values = fs.readFileSync(__dirname + '/5.txt', 'utf8').split('\n');
 
+// Binary Boarding
+
 const findSeat = (path) => {
   let rowStart = 0;
   let rowEnd = 127;

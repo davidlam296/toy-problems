@@ -5,6 +5,8 @@ const groups = fs
   .split('\n\n')
   .map((group) => group.split('\n'));
 
+// Custom Customs
+
 const part1 = (groups) =>
   groups.reduce((count, group) => {
     const chars = new Set();

@@ -1,28 +1,31 @@
 const fs = require('fs');
 
-const rawData = fs.readFileSync(__dirname + '/7.txt', 'utf8').split('\n');
+const bagGraph = fs
+  .readFileSync(__dirname + '/7.txt', 'utf8')
+  .split('\n')
+  .reduce((bags, row) => {
+    const [container, contents] = row.split(' contain ');
 
-const bagGraph = rawData.reduce((bags, row) => {
-  const [container, contents] = row.split(' contain ');
+    bags[container] =
+      contents === 'no other bags.'
+        ? {}
+        : contents
+            .substr(0, contents.length - 1)
+            .split(', ')
+            .reduce((contains, content) => {
+              const splitIdx = content.indexOf(' ');
+              const bagType = content.substr(splitIdx + 1);
+              const count = Number(content.substr(0, splitIdx));
 
-  bags[container] =
-    contents === 'no other bags.'
-      ? {}
-      : contents
-          .substr(0, contents.length - 1)
-          .split(', ')
-          .reduce((contains, content) => {
-            const splitIdx = content.indexOf(' ');
-            const bagType = content.substr(splitIdx + 1);
-            const count = Number(content.substr(0, splitIdx));
+              contains[count > 1 ? bagType : `${bagType}s`] = count;
 
-            contains[count > 1 ? bagType : `${bagType}s`] = count;
+              return contains;
+            }, {});
 
-            return contains;
-          }, {});
+    return bags;
+  }, {});
 
-  return bags;
-}, {});
+// Handy Haversacks
 
 const part1 = (graph, target) => {
   const valid = new Set();
