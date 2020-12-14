@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { performance } = require('perf_hooks');
 
 const shuttleInfo = fs.readFileSync(__dirname + '/13.txt', 'utf8').split('\n');
 shuttleInfo[1] = shuttleInfo[1].split(',');
@@ -66,24 +67,26 @@ const part2 = (departTimes) => {
     return list;
   }, []);
 
+  // To Handle Negatives
   const modulo = (a, b) => {
     const result = a % b;
     return result < 0 ? result + b : result;
   };
 
-  const solveCRT = (remainder, base, mod) => {
+  // Solves each mod part of the equation
+  const solveMOD = (remainder, base, mod) => {
     const GOAL = 1n;
-    const modExceptItself = mod / base;
-    const start = modExceptItself;
+    const productExceptSelf = mod / base;
     let x;
 
     for (let i = 1n; i < base; i++) {
-      if ((start * i) % base === GOAL) x = i;
+      if ((productExceptSelf * i) % base === GOAL) x = i;
     }
 
-    return remainder * modExceptItself * x;
+    return remainder * productExceptSelf * x;
   };
 
+  // Mod === Product of all bus IDs
   const mod = times.reduce((mod, time) => mod * time[0], 1n);
   let sum = 0n;
 
@@ -91,7 +94,7 @@ const part2 = (departTimes) => {
     const remainder = modulo(id - diff, id);
 
     if (remainder === 0) continue;
-    else sum = sum + solveCRT(remainder, id, mod);
+    else sum += solveMOD(remainder, id, mod);
   }
 
   return sum % mod;
