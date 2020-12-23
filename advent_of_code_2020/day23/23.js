@@ -124,12 +124,11 @@ const crabCups = (cups, turns, p2 = false) => {
   if (p2) return start.next.val * start.next.next.val;
   else {
     let res = '';
-    let head = start.next;
+    let curr = start.next;
 
-    while (true) {
-      res += head.val;
-      if (head.next.val === 1) break;
-      else head = head.next;
+    while (curr.val !== 1) {
+      res += curr.val;
+      curr = curr.next;
     }
 
     return res;
