@@ -16,6 +16,8 @@ const instructions = fs
     return mem;
   }, {});
 
+// Docking Data
+
 const part1 = (instructions) => {
   const mem = {};
 

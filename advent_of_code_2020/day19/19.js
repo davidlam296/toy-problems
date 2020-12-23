@@ -12,6 +12,8 @@ const ruleData = data[0]
 const msgs = data[1].split('\n');
 const validAnswers = {};
 
+// Monster Messages
+
 const getValidAnswers = (ruleNumber) => {
   if (validAnswers[ruleNumber].possibilites)
     return validAnswers[ruleNumber].possibilites;

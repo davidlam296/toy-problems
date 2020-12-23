@@ -5,6 +5,10 @@ const data = fs
   .split('\n')[0]
   .split(',');
 
+// Rambunctious Recitation
+
+// Note: Can use Map or other data structure to drastically reduce runtime
+
 const findNum = (nums, target) => {
   const END = target;
   const mem = {};

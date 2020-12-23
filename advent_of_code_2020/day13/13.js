@@ -4,6 +4,8 @@ const { performance } = require('perf_hooks');
 const shuttleInfo = fs.readFileSync(__dirname + '/13.txt', 'utf8').split('\n');
 shuttleInfo[1] = shuttleInfo[1].split(',');
 
+// Shuttle Search
+
 const part1 = (shuttleInfo) => {
   const buses = shuttleInfo[1].filter((n) => n !== 'x').map((n) => Number(n));
 

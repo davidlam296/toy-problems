@@ -1,4 +1,4 @@
-const fs = require('fs');
+wconst fs = require('fs');
 
 const jolts = fs
   .readFileSync(__dirname + '/10.txt', 'utf8')
