@@ -38,3 +38,56 @@ const numberOfArithmeticSlices = (A) => {
 
   return count;
 };
+
+const numberOfArithmeticSlices = (A) => {
+  const slices = {};
+
+  let currCount = 2;
+  let diff = A[1] - A[0];
+
+  for (let i = 2; i < A.length; i++) {
+    const currDiff = A[i] - A[i - 1];
+
+    if (currDiff === diff) {
+      currCount++;
+    } else {
+      if (currCount >= 3) {
+        slices[currCount] = (slices[currCount] || 0) + 1;
+      }
+
+      currCount = 2;
+      diff = currDiff;
+    }
+  }
+
+  if (currCount >= 3) slices[currCount] = (slices[currCount] || 0) + 1;
+
+  let res = 0;
+
+  for (const [len, freq] of Object.entries(slices)) {
+    const combos = ((len - 2) * (len - 1)) / 2;
+    res += combos * freq;
+  }
+
+  return res;
+};
+
+const numberOfArithmeticSlices = (A) => {
+  let result = 0;
+  let currCount = 2;
+  let diff = A[1] - A[0];
+
+  for (let i = 2; i < A.length; i++) {
+    const currDiff = A[i] - A[i - 1];
+
+    if (currDiff === diff) currCount++;
+    else {
+      currCount = 2;
+      diff = currDiff;
+    }
+
+    if (currCount >= 3) result += currCount - 2;
+  }
+
+  return result;
+};
